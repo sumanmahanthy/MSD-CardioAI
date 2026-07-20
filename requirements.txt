@@ -9,10 +9,9 @@ fastapi==0.115.0
 uvicorn[standard]==0.30.0
 python-multipart==0.0.9
 
-# ── Deep Learning (CPU only — no CUDA needed on HuggingFace free tier) ────────
---extra-index-url https://download.pytorch.org/whl/cpu
-torch>=2.1.0+cpu
-torchvision>=0.16.0+cpu
+# ── Deep Learning (HuggingFace base image already has torch — just pin version) ─
+torch>=2.1.0
+torchvision>=0.16.0
 timm>=0.9.12
 
 # ── Image Processing ──────────────────────────────────────────────────────────
