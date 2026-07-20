@@ -140,8 +140,28 @@ def _load_model() -> "StudentModel | None":
 
     path = cfg.BEST_MODEL_PATH
     if not os.path.exists(path):
-        logger.warning(f"Checkpoint not found at '{path}' — demo mode active.")
-        return None
+        # ── Auto-download from HuggingFace Hub if not present locally ────────
+        hf_model_id = os.getenv("HF_MODEL_ID", "")
+        if hf_model_id:
+            try:
+                logger.info(f"Model not found locally. Downloading from HuggingFace Hub: {hf_model_id}")
+                from huggingface_hub import hf_hub_download
+                os.makedirs(os.path.dirname(path) or "models", exist_ok=True)
+                downloaded = hf_hub_download(
+                    repo_id=hf_model_id,
+                    filename="best_student.pth",
+                    local_dir=os.path.dirname(path) or "models",
+                )
+                path = downloaded
+                logger.info(f"Model downloaded successfully to: {path}")
+            except Exception as dl_err:
+                logger.error(f"HuggingFace Hub download failed: {dl_err}")
+                logger.warning("Falling back to demo simulation mode.")
+                return None
+        else:
+            logger.warning(f"Checkpoint not found at '{path}' — demo mode active.")
+            logger.info("Tip: set HF_MODEL_ID env var to auto-download from HuggingFace Hub.")
+            return None
 
     logger.info(f"Loading ConvNeXt-V2-Tiny student from '{path}'...")
     try:
