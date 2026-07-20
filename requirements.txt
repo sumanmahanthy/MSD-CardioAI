@@ -1,16 +1,14 @@
 # CardioAI Backend — HuggingFace Spaces Requirements
-# CPU-only PyTorch to reduce Space size and cold-start time
+#
+# NOTE: HuggingFace auto-installs these — DO NOT re-specify them:
+#   gradio, uvicorn, torch, numpy, websockets
+# Specifying them causes version conflict errors in the build.
 
-# ── Gradio (HuggingFace Spaces wrapper) ──────────────────────────────────────
-gradio>=4.0.0
+# ── Web Server (only extras not auto-installed) ───────────────────────────────
+fastapi>=0.115.2
+python-multipart>=0.0.9
 
-# ── Web Server ────────────────────────────────────────────────────────────────
-fastapi==0.115.0
-uvicorn[standard]==0.30.0
-python-multipart==0.0.9
-
-# ── Deep Learning (HuggingFace base image already has torch — just pin version) ─
-torch>=2.1.0
+# ── Deep Learning extras (torch itself is pre-installed by HF) ────────────────
 torchvision>=0.16.0
 timm>=0.9.12
 
@@ -22,5 +20,4 @@ Pillow>=10.0.0
 grad-cam>=1.4.8
 
 # ── ML Utilities ──────────────────────────────────────────────────────────────
-numpy>=1.24.0
 scikit-learn>=1.3.0
