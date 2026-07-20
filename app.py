@@ -21,9 +21,20 @@
 import sys
 import os
 
-# ── Tell HuggingFace spaces package we are CPU-only (no ZeroGPU) ─────────────
-# Without this, spaces==0.x raises "No @spaces.GPU function detected" at startup
-os.environ["SPACES_ZERO_GPU"] = "0"
+# ── HuggingFace Spaces GPU decorator (required even on CPU tier) ──────────────
+# The `spaces` package auto-installed by HF raises a runtime error if no
+# @spaces.GPU decorated function exists. This dummy function satisfies it.
+try:
+    import spaces
+
+    @spaces.GPU(duration=0)
+    def _gpu_placeholder():
+        """Dummy — satisfies spaces GPU detection. Inference runs on CPU."""
+        pass
+
+except Exception:
+    # Not running on HuggingFace Spaces (e.g. local dev) — skip silently
+    pass
 
 # ── Add backend directory to Python path ─────────────────────────────────────
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "backend"))
