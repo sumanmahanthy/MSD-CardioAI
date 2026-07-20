@@ -21,6 +21,10 @@
 import sys
 import os
 
+# ── Tell HuggingFace spaces package we are CPU-only (no ZeroGPU) ─────────────
+# Without this, spaces==0.x raises "No @spaces.GPU function detected" at startup
+os.environ["SPACES_ZERO_GPU"] = "0"
+
 # ── Add backend directory to Python path ─────────────────────────────────────
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "backend"))
 
