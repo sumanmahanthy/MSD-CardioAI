@@ -1,0 +1,40 @@
+# ── Python ───────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Virtual Environment ───────────────────────────
+backend/venv/
+venv/
+env/
+.env
+
+# ── AI Model Weights (TOO LARGE for GitHub) ───────
+# Upload these to Google Drive / HuggingFace Hub instead
+backend/models/*.pth
+backend/models/*.pt
+backend/models/*.onnx
+backend/models/*.bin
+
+# ── Generated Outputs (patient heatmaps) ──────────
+backend/outputs/
+backend/history.json
+
+# ── Node / React ──────────────────────────────────
+node_modules/
+dist/
+.vite/
+
+# ── OS Files ──────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ───────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
