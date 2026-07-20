@@ -35,7 +35,6 @@ import gradio as gr  # noqa: E402
 
 with gr.Blocks(
     title="CardioAI Backend API",
-    theme=gr.themes.Soft(),
 ) as demo:
     gr.Markdown("""
     # 🫀 CardioAI — Backend API
