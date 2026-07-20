@@ -67,7 +67,10 @@ app.add_middleware(
         "http://localhost:5173",
         "http://localhost:5174",
         "http://10.5.0.10:5174",
-        "http://localhost:3000"
+        "http://localhost:3000",
+        # ── Production: Vercel frontend ──────────────────────────────────────
+        "https://msd-cardio-ai.vercel.app",
+        "https://msd-cardio-ai-sumanmahanthy.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

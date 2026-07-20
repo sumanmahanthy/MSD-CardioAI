@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: cardioai-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MODEL_PATH
+        value: models/best_student.pth
+      - key: TTA_ENABLED
+        value: "false"
+      - key: COMPILE_MODEL
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
